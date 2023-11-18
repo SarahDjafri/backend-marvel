@@ -26,7 +26,7 @@ router.get("/comics", async (req, res) => {
   }
 });
 
-router.get("/comics/:characterId", async (req, res) => {
+router.get("/comics/character/:characterId", async (req, res) => {
   try {
     const comicCharacterId = req.params.characterId;
     const response = await axios.get(
