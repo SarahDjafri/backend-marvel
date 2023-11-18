@@ -26,12 +26,15 @@ router.get("/characters", async (req, res) => {
   }
 });
 
-router.get("/character/:characterId", async (req, res) => {
+router.get("/character/:id", async (req, res) => {
   try {
+    const characterId = req.params.id;
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/character/${req.params.id}?apiKey=${process.env.MARVEL_API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/character/${characterId}?apiKey=${process.env.MARVEL_API_KEY}`
     );
-    res.json(response.data);
+    const character = response.data;
+    // console.log(character);
+    res.status(200).json(character);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "server error" });

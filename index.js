@@ -1,12 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const axios = require("axios");
+// const mongoose = require("mongoose");
+
 require("dotenv").config();
 
 const app = express();
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost/marvel");
+// mongoose.connect("mongodb://localhost/marvel");
 
 const comicsRoutes = require("./routes/comicsRoutes");
 const charactersRoutes = require("./routes/charactersRoutes");

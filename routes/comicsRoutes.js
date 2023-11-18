@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const Comic = require("../models/comic");
 
 router.get("/comics", async (req, res) => {
   try {
@@ -29,44 +28,31 @@ router.get("/comics", async (req, res) => {
 
 router.get("/comics/:characterId", async (req, res) => {
   try {
+    const comicCharacterId = req.params.characterId;
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params.id}?apiKey=${process.env.MARVEL_API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${comicCharacterId}?apiKey=${process.env.MARVEL_API_KEY}`
     );
-    res.json(response.data);
+    const comicCharacter = response.data;
+    res.status(200).json(comicCharacter);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "server error" });
   }
 });
 
-router.get("/comic/:id", async (req, res) => {
+router.get("/comics/:id", async (req, res) => {
   try {
+    const comicId = req.params.id;
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comic/${req.params.id}?apiKey=${process.env.MARVEL_API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comic/${comicId}?apiKey=${process.env.MARVEL_API_KEY}`
     );
-    res.json(response.data);
+    const comic = response.data;
+    // console.log(comic);
+    res.status(200).json(comic);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: "Erreur serveur" });
   }
 });
 
 module.exports = router;
-
-// router.get("/comics", async (req, res) => {
-//   try {
-//     const comics = await fetchComics();
-
-//     const comicsWithUrls = comics.map((comic) => {
-//       return {
-//         ...comic,
-//         url: `/comic/${comic.id}`,
-//       };
-//     });
-
-//     res.json(comicsWithUrls);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "server error" });
-//   }
-// });
