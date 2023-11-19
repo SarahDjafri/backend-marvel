@@ -15,7 +15,7 @@ router.get("/comics", async (req, res) => {
     const skip = (pageToSend - 1) * limitN;
 
     const apiKey = process.env.MARVEL_API_KEY;
-    let apiUrl = `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${apiKey}&limit=${limitN}&skip=${skip}`;
+    let apiUrl = `https://lereacteur-marvel-api.herokuapp.com/comics${apiKey}&limit=${limitN}&skip=${skip}`;
     if (title) {
       console.log(title);
       apiUrl = apiUrl + `&title=${title}`;
