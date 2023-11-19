@@ -1,11 +1,13 @@
 const express = require("express");
 const axios = require("axios");
+const corsMiddleware = require("./middleware/cors");
 // const mongoose = require("mongoose");
 
 require("dotenv").config();
 
 const app = express();
 app.use(express.json());
+app.use(corsMiddleware);
 
 // mongoose.connect("mongodb://localhost/marvel");
 
