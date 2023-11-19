@@ -17,14 +17,14 @@ router.get("/comics", async (req, res) => {
     const apiKey = process.env.MARVEL_API_KEY;
     let apiUrl = `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${apiKey}&limit=${limitN}&skip=${skip}`;
     if (title) {
-      console.log(title);
+      // console.log(title);
       apiUrl = apiUrl + `&title=${title}`;
     }
     const response = await axios.get(apiUrl);
-    console.log(response.data);
+    // console.log(response.data);
     const comicsFromAPI = response.data.results;
 
-    res.status(200).json({ comics: comicsFromAPI });
+    res.status(200).json({ comics: comicsFromAPI, count: response.data.count });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "server error" });

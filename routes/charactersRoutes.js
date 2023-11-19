@@ -24,7 +24,9 @@ router.get("/characters", async (req, res) => {
     const response = await axios.get(apiUrl);
     const charactersFromAPI = response.data.results;
 
-    res.status(200).json({ characters: charactersFromAPI });
+    res
+      .status(200)
+      .json({ characters: charactersFromAPI, count: response.data.count });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "server error" });
